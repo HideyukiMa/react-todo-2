@@ -1,0 +1,60 @@
+@import '../../variables.scss';
+
+.createTodo {
+	height: 100%;
+	.form {
+		height: 100%;
+		.content {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 24px;
+			.label {
+				font-family: $fontFamily;
+				font-size: $sm;
+				margin-bottom: 4px;
+				font-weight: bold;
+				color: $black;
+			}
+		}
+		.input {
+			.inputValue {
+				font-size: $sm;
+				padding: 8px 16px;
+				border: 1px solid $black;
+				border-radius: 6px;
+			}
+		}
+		.textarea {
+			height: 60%;
+
+			.textareaValue {
+				font-size: $sm;
+				height: 100%;
+				padding: 8px 16px;
+				border: 1px solid $black;
+				border-radius: 6px;
+				resize: none;
+				overflow-y: scroll;
+			}
+		}
+		.buttonArea {
+			width: 100%;
+			display: flex;
+			justify-content: end;
+			.button {
+				font-size: $sm;
+				background-color: $main;
+				border: none;
+				cursor: pointer;
+				padding: 8px 16px;
+				color: $white;
+				font-weight: bold;
+				border-radius: 6px;
+
+				&:hover {
+					opacity: 0.5;
+				}
+			}
+		}
+	}
+}

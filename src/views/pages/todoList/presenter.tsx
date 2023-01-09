@@ -8,7 +8,7 @@ import paths from '../../../config/paths';
 
 const TodoListUI: FC = () => {
 	return (
-		<div className={classes.root}>
+		<div className={classes.todoList}>
 			<Header title="Todo一覧" path={paths.createTodo} buttonText="新規作成" />
 			<div className={classes.list}>
 				{sampleItems.map((item: Todo) => {

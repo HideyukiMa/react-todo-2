@@ -5,7 +5,7 @@ import classes from './index.module.scss';
 
 const ListItem: FC<Props> = ({ id, title, isDone }) => {
 	return (
-		<div className={classes.root}>
+		<div className={classes.listItem}>
 			<input
 				type="checkbox"
 				disabled

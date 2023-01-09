@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Header: FC<Props> = ({ title, path, buttonText }) => {
 	return (
-		<div className={classes.root}>
+		<div className={classes.header}>
 			<Title title={title} />
 			<Link to={path} className={classes.link}>
 				<button className={classes.button}>{buttonText}</button>

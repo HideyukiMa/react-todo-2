@@ -1,9 +1,10 @@
 @import '../../variables.scss';
 
-.root {
+.header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 8px;
 	.link {
 		.button {
 			font-size: $sm;
