@@ -11,6 +11,7 @@ import CreateTodo from '../views/pages/createTodo';
 import EditTodo from '../views/pages/editTodo';
 import TodoDetail from '../views/pages/todoDetail';
 import TodoList from '../views/pages/todoList';
+import classes from './index.module.scss';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -25,7 +26,11 @@ const router = createBrowserRouter(
 );
 
 const AppRoutes: FC = () => {
-	return <RouterProvider router={router} />;
+	return (
+		<div className={classes.root}>
+			<RouterProvider router={router} />
+		</div>
+	);
 };
 
 export default AppRoutes;

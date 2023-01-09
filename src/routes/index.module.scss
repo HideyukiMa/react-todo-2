@@ -1,0 +1,8 @@
+@import '../views/variables.scss';
+.root {
+	height: 70%;
+	width: 80%;
+	background-color: $baseBgColor;
+	border-radius: 8px;
+	padding: 16px 24px;
+}
