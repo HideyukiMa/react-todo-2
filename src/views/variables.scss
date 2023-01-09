@@ -3,17 +3,17 @@ $baseFontStyle: 'Noto Sans CJK JP', 'Roboto', 'メイリオ', 'Meiryo', verdana,
 	'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', Osaka, 'ＭＳ Ｐゴシック',
 	'MS PGothic', Sans-Serif;
 
-// textColor
-$baseFontColor: #333333;
-
 // fontSize
-$smFontSize: 12px;
-$mdFontSize: 20px;
-$lgFontSize: 32px;
+$xs: 12px;
+$sm: 16px;
+$md: 20px;
+$lg: 24px;
+$xl: 28px;
 
-// backgroundColor
-$baseBgColor: #eeeeee;
-$grayBgColor: #e2e2e2;
-$mainBgColor: #017bfe;
-$accentBgColor: #28a745;
-$cautionBgColor: #dc3444;
+// Color
+$black: #333333;
+$white: #eeeeee;
+$gray: #e2e2e2;
+$main: #017bfe;
+$accent: #28a745;
+$caution: #dc3444;
