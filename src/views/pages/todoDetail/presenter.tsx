@@ -5,7 +5,7 @@ import Header from '../../components/header';
 const TodoDetailUI: FC = () => {
 	return (
 		<div>
-			<Header title="Todo詳細" path={paths.todoList} buttonText="戻る" />
+			<Header title="Todo詳細" path={paths.todoList} buttonText="一覧に戻る" />
 			TodoListUI
 		</div>
 	);

@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import Title from '../../components/title';
+import paths from '../../../config/paths';
+import Header from '../../components/header';
 
 const EditTodoUI: FC = () => {
 	return (
 		<div>
-			<Title title={'TODO編集'} />
+			<Header title="Todo編集" path={paths.todoList} buttonText="一覧に戻る" />
 			TodoListUI
 		</div>
 	);
