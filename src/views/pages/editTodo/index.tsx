@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
+import EditTodoUI from './presenter';
 
 const EditTodo: FC = () => {
-	return <div>EditTodo</div>;
+	return <EditTodoUI />;
 };
 
 export default EditTodo;

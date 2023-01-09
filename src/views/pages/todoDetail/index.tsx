@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
+import TodoDetailUI from './presenter';
 
 const TodoDetail: FC = () => {
-	return <div>TodoDetail</div>;
+	return <TodoDetailUI />;
 };
 
 export default TodoDetail;

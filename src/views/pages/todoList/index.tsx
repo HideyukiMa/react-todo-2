@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
+import TodoListUI from './presenter';
 
 const TodoList: FC = () => {
-	return <div>TodoList</div>;
+	return <TodoListUI />;
 };
 
 export default TodoList;

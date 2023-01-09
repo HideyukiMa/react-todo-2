@@ -7,10 +7,10 @@ import {
 	RouterProvider
 } from 'react-router-dom';
 import paths from '../config/paths';
-import CreateTodo from '../views/pages/CreateTodo';
-import EditTodo from '../views/pages/EditTodo';
-import TodoDetail from '../views/pages/TodoDetail';
-import TodoList from '../views/pages/TodoList';
+import CreateTodo from '../views/pages/createTodo';
+import EditTodo from '../views/pages/editTodo';
+import TodoDetail from '../views/pages/todoDetail';
+import TodoList from '../views/pages/todoList';
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
