@@ -20,7 +20,7 @@ const router = createBrowserRouter(
 			<Route path={paths.todoList} element={<TodoList />} />
 			<Route path={paths.todoDetail} element={<TodoDetail />} />
 			<Route path={paths.editTodo} element={<EditTodo />} />
-			<Route path="/*" element={<Navigate to={paths.todoList} />} />
+			<Route path="*" element={<Navigate to={paths.todoList} />} />
 		</>
 	)
 );

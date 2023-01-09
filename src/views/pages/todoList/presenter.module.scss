@@ -1,5 +1,28 @@
+@import '../../variables.scss';
+
 .root {
 	width: 100%;
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		.link {
+			.button {
+				font-size: $sm;
+				background-color: $gray;
+				border: none;
+				cursor: pointer;
+				padding: 8px 16px;
+				color: $black;
+				font-weight: bold;
+				border-radius: 6px;
+
+				&:hover {
+					opacity: 0.5;
+				}
+			}
+		}
+	}
 	.list {
 		margin-top: 8px;
 		width: 100%;

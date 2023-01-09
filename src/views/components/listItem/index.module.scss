@@ -36,6 +36,10 @@
 				color: $white;
 				font-weight: bold;
 				border-radius: 6px;
+
+				&:hover {
+					opacity: 0.5;
+				}
 			}
 			.deleteButton {
 				font-size: $sm;
@@ -46,6 +50,10 @@
 				color: $white;
 				font-weight: bold;
 				border-radius: 6px;
+
+				&:hover {
+					opacity: 0.5;
+				}
 			}
 		}
 	}
