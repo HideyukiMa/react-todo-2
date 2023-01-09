@@ -6,9 +6,8 @@ $baseFont: 'Noto Sans CJK JP', 'Roboto', 'メイリオ', 'Meiryo', verdana,
 // base text color
 $baseFontColor: #333333;
 
-// カラーイベントリ（カラーの宣言はここで行う）]
-// TODO:名称をわかり易くする（したの命名はXDでのカラー名を踏襲したがわかりにくい）
-$baseColor: #eeeeee;
-$mainColor: #017bfe;
-$accentColor: #28a745;
-$cautionColor: #dc3444;
+// base background-color color
+$baseBgColor: #eeeeee;
+$mainBgColor: #017bfe;
+$accentBgColor: #28a745;
+$cautionBgColor: #dc3444;
