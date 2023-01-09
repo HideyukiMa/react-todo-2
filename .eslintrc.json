@@ -19,5 +19,11 @@
     "plugins": [
         "react"
     ],
+    "ignorePatterns": [
+        "./node_modules",
+        // UI作成中に一時的に設定
+        "./src/features",
+        "./src/app"
+    ],
     "rules": {}
 }
