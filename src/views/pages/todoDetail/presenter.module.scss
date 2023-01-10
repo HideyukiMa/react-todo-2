@@ -1,8 +1,8 @@
 @import '../../variables.scss';
 
-.editTodo {
+.todoDetail {
 	height: 100%;
-	.form {
+	.contents {
 		height: 100%;
 		.content {
 			display: flex;
@@ -22,6 +22,7 @@
 				padding: 8px 16px;
 				border: 1px solid $black;
 				border-radius: 6px;
+				cursor: not-allowed;
 			}
 		}
 		.textarea {
@@ -35,6 +36,15 @@
 				border-radius: 6px;
 				resize: none;
 				overflow-y: scroll;
+				cursor: not-allowed;
+			}
+		}
+		.radio {
+			.radioInput {
+				cursor: not-allowed;
+			}
+			.radioLabel {
+				cursor: not-allowed;
 			}
 		}
 		.buttonArea {
@@ -43,7 +53,6 @@
 			justify-content: flex-end;
 			.button {
 				font-size: $sm;
-				background-color: $accent;
 				border: none;
 				cursor: pointer;
 				padding: 8px 16px;
@@ -54,6 +63,13 @@
 				&:hover {
 					opacity: 0.5;
 				}
+			}
+			.edit {
+				background-color: $accent;
+				margin-right: 16px;
+			}
+			.delete {
+				background-color: $caution;
 			}
 		}
 	}
