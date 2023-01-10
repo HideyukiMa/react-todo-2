@@ -1,3 +1,5 @@
 import { Todo } from '../../../types/todo';
 
-export interface Props extends Todo {}
+export interface Props extends Todo {
+	openModal?: () => void;
+}

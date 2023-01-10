@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import paths from '../../../config/paths';
+import DeleteModal from '../../components/deleteModal';
 import Header from '../../components/header';
 import classes from './presenter.module.scss';
 import { Props } from './types';
 
-const TodoDetailUI: FC<Props> = ({ id, title, details, isDone }) => {
+const TodoDetailUI: FC<Props> = ({ id, title, details, isDone, openModal }) => {
 	return (
 		<div className={classes.todoDetail}>
 			<Header title="Todo詳細" path={paths.todoList} buttonText="一覧に戻る" />
@@ -57,11 +58,15 @@ const TodoDetailUI: FC<Props> = ({ id, title, details, isDone }) => {
 						</button>
 					</Link>
 
-					<button className={`${classes.button} ${classes.delete}`}>
+					<button
+						onClick={openModal}
+						className={`${classes.button} ${classes.delete}`}
+					>
 						削除する
 					</button>
 				</div>
 			</div>
+			<DeleteModal />
 		</div>
 	);
 };

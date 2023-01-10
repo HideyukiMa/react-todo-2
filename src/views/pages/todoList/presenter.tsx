@@ -5,6 +5,7 @@ import sampleItems from './sampleItems.json';
 import { Todo } from '../../../types/todo';
 import classes from './presenter.module.scss';
 import paths from '../../../config/paths';
+import DeleteModal from '../../components/deleteModal';
 
 const TodoListUI: FC = () => {
 	return (
@@ -23,6 +24,7 @@ const TodoListUI: FC = () => {
 					);
 				})}
 			</div>
+			<DeleteModal />
 		</div>
 	);
 };
