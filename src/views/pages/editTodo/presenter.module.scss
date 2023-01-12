@@ -23,6 +23,10 @@
 				border: 1px solid $black;
 				border-radius: 6px;
 			}
+			.error {
+				margin-top: 4px;
+				color: $caution;
+			}
 		}
 		.textarea {
 			height: 60%;
