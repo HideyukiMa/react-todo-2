@@ -1,0 +1,76 @@
+@import '../../variables.scss';
+
+.todoDetail {
+	height: 100%;
+	.contents {
+		height: 100%;
+		.content {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 24px;
+			.label {
+				font-family: $fontFamily;
+				font-size: $sm;
+				margin-bottom: 4px;
+				font-weight: bold;
+				color: $black;
+			}
+		}
+		.input {
+			.inputValue {
+				font-size: $sm;
+				padding: 8px 16px;
+				border: 1px solid $black;
+				border-radius: 6px;
+				cursor: not-allowed;
+			}
+		}
+		.textarea {
+			height: 60%;
+
+			.textareaValue {
+				font-size: $sm;
+				height: 100%;
+				padding: 8px 16px;
+				border: 1px solid $black;
+				border-radius: 6px;
+				resize: none;
+				overflow-y: scroll;
+				cursor: not-allowed;
+			}
+		}
+		.radio {
+			.radioInput {
+				cursor: not-allowed;
+			}
+			.radioLabel {
+				cursor: not-allowed;
+			}
+		}
+		.buttonArea {
+			width: 100%;
+			display: flex;
+			justify-content: flex-end;
+			.button {
+				font-size: $sm;
+				border: none;
+				cursor: pointer;
+				padding: 8px 16px;
+				color: $white;
+				font-weight: bold;
+				border-radius: 6px;
+
+				&:hover {
+					opacity: 0.5;
+				}
+			}
+			.edit {
+				background-color: $accent;
+				margin-right: 16px;
+			}
+			.delete {
+				background-color: $caution;
+			}
+		}
+	}
+}

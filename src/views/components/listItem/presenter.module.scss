@@ -1,0 +1,65 @@
+@import '../../variables.scss';
+
+.listItem {
+	display: flex;
+	width: 100%;
+	padding: 16px 0;
+	border-bottom: 1px solid $gray;
+	.input {
+		display: flex;
+		align-items: center;
+		width: 20px;
+		cursor: not-allowed;
+	}
+	.contents {
+		margin-left: 8px;
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+
+		.link {
+			display: flex;
+			align-items: center;
+			font-family: $fontFamily;
+			font-size: $md;
+			color: $black;
+			text-decoration: none;
+			cursor: pointer;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		.buttons {
+			.editButton {
+				font-size: $sm;
+				background-color: $accent;
+				margin-right: 16px;
+				border: none;
+				cursor: pointer;
+				padding: 8px 16px;
+				color: $white;
+				font-weight: bold;
+				border-radius: 6px;
+
+				&:hover {
+					opacity: 0.5;
+				}
+			}
+			.deleteButton {
+				font-size: $sm;
+				background-color: $caution;
+				border: none;
+				cursor: pointer;
+				padding: 8px 16px;
+				color: $white;
+				font-weight: bold;
+				border-radius: 6px;
+
+				&:hover {
+					opacity: 0.5;
+				}
+			}
+		}
+	}
+}
