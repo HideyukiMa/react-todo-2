@@ -23,7 +23,17 @@
         "./node_modules",
         // UI作成中に一時的に設定
         "./src/features",
-        "./src/app"
+        "./src/app",
+        "./src/reportWebVitals.ts"
     ],
-    "rules": {}
+    "rules": {
+        "@typescript-eslint/no-misused-promises": [
+            2,
+            {
+                "checksVoidReturn": {
+                    "attributes": false
+                }
+            }
+        ]
+    },
 }
