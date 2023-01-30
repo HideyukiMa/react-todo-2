@@ -1,4 +1,5 @@
 import React, { FC, useEffect } from 'react';
+
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import {
 	getTodoListAsync,
@@ -19,6 +20,7 @@ const TodoList: FC = () => {
 		};
 		void getTodoList();
 	}, []);
+
 	return <TodoListUI todoList={todoList} />;
 };
 

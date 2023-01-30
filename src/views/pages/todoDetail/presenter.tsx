@@ -6,14 +6,16 @@ import Header from '../../components/header';
 import classes from './presenter.module.scss';
 import { Props } from './types';
 
-const TodoDetailUI: FC<Props> = ({ id, title, details, isDone, openModal }) => {
+const TodoDetailUI: FC<Props> = ({ todo, openModal }) => {
+	console.log(todo);
+
 	return (
 		<div className={classes.todoDetail}>
 			<Header title="Todo詳細" path={paths.todoList} buttonText="一覧に戻る" />
 			<div className={classes.contents}>
 				<div className={`${classes.content} ${classes.input}`}>
 					<label className={classes.label}>タイトル</label>
-					<input className={classes.inputValue} value={title} disabled />
+					<input className={classes.inputValue} value={todo?.title} disabled />
 				</div>
 				<div className={`${classes.content} ${classes.textarea}`}>
 					<label className={classes.label}>詳細</label>
@@ -21,7 +23,7 @@ const TodoDetailUI: FC<Props> = ({ id, title, details, isDone, openModal }) => {
 					<textarea
 						className={classes.textareaValue}
 						// @ts-expect-error
-						value={details}
+						value={todo.details}
 						disabled
 					/>
 				</div>
@@ -31,7 +33,7 @@ const TodoDetailUI: FC<Props> = ({ id, title, details, isDone, openModal }) => {
 						type="radio"
 						name="isDone"
 						value={1}
-						checked={isDone}
+						checked={todo?.isDone}
 						disabled
 						className={classes.radioInput}
 					/>
@@ -43,7 +45,7 @@ const TodoDetailUI: FC<Props> = ({ id, title, details, isDone, openModal }) => {
 						type="radio"
 						name="isDone"
 						value={0}
-						checked={!isDone}
+						checked={todo?.isDone === false}
 						disabled
 						className={classes.radioInput}
 					/>
@@ -52,7 +54,8 @@ const TodoDetailUI: FC<Props> = ({ id, title, details, isDone, openModal }) => {
 					</label>
 				</div>
 				<div className={classes.buttonArea}>
-					<Link to={`/edit-todo/${id}`}>
+					{/* eslint-disable-next-line @typescript-eslint/restrict-template-expressions */}
+					<Link to={`/edit-todo/${todo?.id}`}>
 						<button className={`${classes.button} ${classes.edit}`}>
 							編集する
 						</button>

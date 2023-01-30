@@ -13,7 +13,7 @@ const ListItemUI: FC<Props> = ({ id, title, isDone, openModal }) => {
 				className={classes.input}
 			/>
 			<div className={classes.contents}>
-				<Link to={`/todo/${id}`} className={classes.link}>
+				<Link to={`todo/${id}`} className={classes.link}>
 					{title}
 				</Link>
 				<div className={classes.buttons}>
