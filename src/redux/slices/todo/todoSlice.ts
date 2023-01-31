@@ -1,11 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getTodoAPI, getTodoListAPI } from './todoAPI';
+import { createTodoAPI, getTodoAPI, getTodoListAPI } from './todoAPI';
 import { initialState } from './initialState';
 import { RootState } from '../../store';
 import { Todo } from '../../../types/todo';
+import { CreateInputs } from '../../../views/pages/createTodo/types';
+
+export const createTodoAsync = createAsyncThunk(
+	'todo/createTodo',
+	async (args: CreateInputs) => {
+		const response = await createTodoAPI(args);
+		return response;
+	}
+);
 
 export const getTodoListAsync = createAsyncThunk(
-	'post/getTodoList',
+	'todo/getTodoList',
 	async () => {
 		const response = await getTodoListAPI();
 		return response;
@@ -13,7 +22,7 @@ export const getTodoListAsync = createAsyncThunk(
 );
 
 export const getTodoAsync = createAsyncThunk(
-	'post/getTodo',
+	'todo/getTodo',
 	async (todoId: number) => {
 		const response = await getTodoAPI(todoId);
 		return response;
@@ -25,6 +34,11 @@ export const todoSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
+		builder.addCase(createTodoAsync.fulfilled, (state, action) => {
+			if (state.todoList !== undefined && action.payload !== undefined) {
+				state.todoList = [...state.todoList, action.payload];
+			}
+		});
 		builder.addCase(getTodoListAsync.fulfilled, (state, action) => {
 			state.todoList = action.payload;
 		});
