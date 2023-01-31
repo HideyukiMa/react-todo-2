@@ -20,27 +20,19 @@ const EditTodo: FC = () => {
 		formState: { errors }
 	} = useForm<EditInputs>();
 	const onSubmit: SubmitHandler<EditInputs> = async (data): Promise<void> => {
-		try {
-			const args = {
-				todoId: Number(todoId),
-				title: data.title,
-				details: data.details,
-				isDone: data.isDone
-			};
-			await dispatch(editTodoAsync(args));
-			alert('Todoの編集に成功しました。');
-		} catch (error) {
-			alert('Todoの編集に失敗しました。');
-		}
+		const args = {
+			todoId: Number(todoId),
+			title: data.title,
+			details: data.details,
+			isDone: data.isDone
+		};
+		await dispatch(editTodoAsync(args));
+		alert('Todoの編集に成功しました。');
 	};
 
 	useEffect(() => {
 		const getTodo = async (): Promise<void> => {
-			try {
-				await dispatch(getTodoAsync(Number(todoId)));
-			} catch (error) {
-				alert('Todoの取得に失敗しました');
-			}
+			await dispatch(getTodoAsync(Number(todoId)));
 		};
 		void getTodo();
 	}, [todoId]);

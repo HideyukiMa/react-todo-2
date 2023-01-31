@@ -13,12 +13,8 @@ const TodoList: FC = () => {
 	const todoList = useAppSelector(selectTodoList);
 	useEffect(() => {
 		const getTodoList = async (): Promise<void> => {
-			try {
-				dispatch(clearTodoDetailState());
-				await dispatch(getTodoListAsync());
-			} catch (error) {
-				alert('Todo一覧の取得に失敗しました');
-			}
+			dispatch(clearTodoDetailState());
+			await dispatch(getTodoListAsync());
 		};
 		void getTodoList();
 	}, []);

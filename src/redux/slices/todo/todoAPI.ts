@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Todo } from '../../../types/todo';
 import { CreateInputs } from '../../../views/pages/createTodo/types';
 import { EditInputs } from '../../../views/pages/editTodo/types';
+import { DeleteTodoArgs } from './types';
 
 export const todoApi = axios.create({
 	baseURL: 'http://localhost:8080/todo'
@@ -20,6 +21,7 @@ export const createTodoAPI = async (
 		return todo;
 	} catch (error) {
 		console.error(error);
+		alert('Todoの作成に失敗しました。');
 	}
 };
 
@@ -30,6 +32,7 @@ export const getTodoListAPI = async (): Promise<Todo[] | undefined> => {
 		return todoList;
 	} catch (error) {
 		console.error(error);
+		alert('Todo一覧の取得に失敗しました。');
 	}
 };
 
@@ -40,6 +43,7 @@ export const getTodoAPI = async (todoId: number): Promise<Todo | undefined> => {
 		return todo;
 	} catch (error) {
 		console.error(error);
+		alert('Todoの取得に失敗しました。');
 	}
 };
 
@@ -49,8 +53,6 @@ export const editTodoAPI = async (
 	try {
 		const { todoId, title, details, isDone } = args;
 		const convertedIsDone: boolean = isDone === '完了';
-		console.log(convertedIsDone);
-
 		const response = await todoApi.patch(`/`, {
 			todoId,
 			title,
@@ -61,5 +63,22 @@ export const editTodoAPI = async (
 		return todo;
 	} catch (error) {
 		console.error(error);
+		alert('Todoの編集に失敗しました。');
+	}
+};
+
+export const deleteTodoAPI = async (
+	args: DeleteTodoArgs
+): Promise<Todo | undefined> => {
+	try {
+		const { todoId } = args;
+		const response = await todoApi.delete(`/`, {
+			data: { todoId }
+		});
+		const todo: Todo = response.data;
+		return todo;
+	} catch (error) {
+		console.error(error);
+		alert('Todoの削除に失敗しました。');
 	}
 };

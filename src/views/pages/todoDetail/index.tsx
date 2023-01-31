@@ -4,25 +4,23 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { toggleDeleteModal } from '../../../redux/slices/modal/modalSlice';
 import {
 	getTodoAsync,
-	selectTodoDetail
+	selectTodoDetail,
+	setFocusTodoId
 } from '../../../redux/slices/todo/todoSlice';
 import TodoDetailUI from './presenter';
 
 const TodoDetail: FC = () => {
 	const dispatch = useAppDispatch();
 	const todo = useAppSelector(selectTodoDetail);
+	const { todoId } = useParams();
 	const openModal = (): void => {
+		dispatch(setFocusTodoId(todoId));
 		dispatch(toggleDeleteModal(true));
 	};
-	const { todoId } = useParams();
 
 	useEffect(() => {
 		const getTodo = async (): Promise<void> => {
-			try {
-				await dispatch(getTodoAsync(Number(todoId)));
-			} catch (error) {
-				alert('Todoの取得に失敗しました');
-			}
+			await dispatch(getTodoAsync(Number(todoId)));
 		};
 		void getTodo();
 	}, [todoId]);
