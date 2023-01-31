@@ -7,8 +7,6 @@ import classes from './presenter.module.scss';
 import { Props } from './types';
 
 const TodoDetailUI: FC<Props> = ({ todo, openModal }) => {
-	console.log(todo);
-
 	return (
 		<div className={classes.todoDetail}>
 			<Header title="Todo詳細" path={paths.todoList} buttonText="一覧に戻る" />
@@ -22,8 +20,7 @@ const TodoDetailUI: FC<Props> = ({ todo, openModal }) => {
 
 					<textarea
 						className={classes.textareaValue}
-						// @ts-expect-error
-						value={todo.details}
+						value={todo?.details != null ? todo.details : ''}
 						disabled
 					/>
 				</div>

@@ -14,8 +14,8 @@ export const getTodoListAsync = createAsyncThunk(
 
 export const getTodoAsync = createAsyncThunk(
 	'post/getTodo',
-	async (id: number) => {
-		const response = await getTodoAPI(id);
+	async (todoId: number) => {
+		const response = await getTodoAPI(todoId);
 		return response;
 	}
 );
