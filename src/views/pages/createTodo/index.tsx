@@ -16,12 +16,9 @@ const CreateTodo: FC = () => {
 		formState: { errors }
 	} = useForm<CreateInputs>();
 	const onSubmit: SubmitHandler<CreateInputs> = async (data): Promise<void> => {
-		try {
-			await dispatch(createTodoAsync(data));
-			navigate(paths.todoList);
-		} catch (error) {
-			alert('Todoの投稿に失敗しました。');
-		}
+		await dispatch(createTodoAsync(data));
+		alert('Todoの作成に成功しました。');
+		navigate(paths.todoList);
 	};
 	return (
 		<CreateTodoUI

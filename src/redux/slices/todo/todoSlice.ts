@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
 	createTodoAPI,
+	deleteTodoAPI,
 	editTodoAPI,
 	getTodoAPI,
 	getTodoListAPI
@@ -10,6 +11,7 @@ import { RootState } from '../../store';
 import { Todo } from '../../../types/todo';
 import { CreateInputs } from '../../../views/pages/createTodo/types';
 import { EditInputs } from '../../../views/pages/editTodo/types';
+import { DeleteTodoArgs } from './types';
 
 export const createTodoAsync = createAsyncThunk(
 	'todo/createTodo',
@@ -42,6 +44,13 @@ export const editTodoAsync = createAsyncThunk(
 		return response;
 	}
 );
+export const deleteTodoAsync = createAsyncThunk(
+	'todo/deleteTodo',
+	async (args: DeleteTodoArgs) => {
+		const response = await deleteTodoAPI(args);
+		return response;
+	}
+);
 
 export const todoSlice = createSlice({
 	name: 'todo',
@@ -49,6 +58,9 @@ export const todoSlice = createSlice({
 	reducers: {
 		clearTodoDetailState: (state) => {
 			state.todoDetail = initialTodoDetail;
+		},
+		setFocusTodoId: (state, action) => {
+			state.focusTodoId = Number(action.payload);
 		}
 	},
 	extraReducers: (builder) => {
@@ -64,7 +76,6 @@ export const todoSlice = createSlice({
 			state.todoDetail = action.payload;
 		});
 		builder.addCase(editTodoAsync.fulfilled, (state, action) => {
-			state.todoDetail = action.payload;
 			// state.todoListの中から指定したtodoを抜き出す
 			const todo = state.todoList?.find((todo) => {
 				return todo.id === action.payload?.id;
@@ -76,14 +87,21 @@ export const todoSlice = createSlice({
 				todo.isDone = action.payload.isDone;
 			}
 		});
+		builder.addCase(deleteTodoAsync.fulfilled, (state, action) => {
+			state.todoList = state.todoList?.filter(
+				(todo) => todo.id !== action.payload?.id
+			);
+		});
 	}
 });
 
-export const { clearTodoDetailState } = todoSlice.actions;
+export const { clearTodoDetailState, setFocusTodoId } = todoSlice.actions;
 
 export const selectTodoList = (state: RootState): Todo[] | undefined =>
 	state.todo.todoList;
 export const selectTodoDetail = (state: RootState): Todo | undefined =>
 	state.todo.todoDetail;
+export const selectFocusTodoId = (state: RootState): number =>
+	state.todo.focusTodoId;
 
 export default todoSlice.reducer;

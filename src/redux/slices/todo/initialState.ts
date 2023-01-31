@@ -7,8 +7,10 @@ export const initialTodoDetail = {
 	details: '',
 	isDone: false
 };
+export const initialFocusTodoId = 0;
 
 export const initialState: TodoState = {
 	todoList: initialTodoList,
-	todoDetail: initialTodoDetail
+	todoDetail: initialTodoDetail,
+	focusTodoId: initialFocusTodoId
 };
