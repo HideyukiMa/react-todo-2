@@ -6,7 +6,8 @@ import {
 	UseFormRegister
 } from 'react-hook-form';
 
-export interface Props extends Todo {
+export interface Props {
+	todo: Todo | undefined;
 	register: UseFormRegister<EditInputs>;
 	handleSubmit: UseFormHandleSubmit<EditInputs>;
 	errors: Partial<
@@ -19,7 +20,8 @@ export interface Props extends Todo {
 }
 
 export interface EditInputs {
+	todoId?: number;
 	title: string;
 	details?: string;
-	isDone: boolean;
+	isDone: string;
 }

@@ -5,10 +5,7 @@ import classes from './presenter.module.scss';
 import { Props } from './types';
 
 const EditTodoUI: FC<Props> = ({
-	id,
-	title,
-	details,
-	isDone,
+	todo,
 	register,
 	handleSubmit,
 	errors,
@@ -22,7 +19,7 @@ const EditTodoUI: FC<Props> = ({
 					<label className={classes.label}>タイトル</label>
 					<input
 						{...register('title', { required: true })}
-						defaultValue={title}
+						defaultValue={todo?.title}
 						className={classes.inputValue}
 					/>
 					{errors.title != null && (
@@ -33,8 +30,7 @@ const EditTodoUI: FC<Props> = ({
 					<label className={classes.label}>詳細</label>
 					<textarea
 						{...register('details')}
-						// @ts-expect-error
-						defaultValue={details}
+						defaultValue={todo?.details != null ? todo.details : ''}
 						className={classes.textareaValue}
 					/>
 				</div>
@@ -45,7 +41,7 @@ const EditTodoUI: FC<Props> = ({
 						type="radio"
 						name="isDone"
 						value="完了"
-						defaultChecked={isDone}
+						defaultChecked={todo?.isDone}
 					/>
 					<label htmlFor="true">完了</label>
 					<input
@@ -54,7 +50,7 @@ const EditTodoUI: FC<Props> = ({
 						type="radio"
 						name="isDone"
 						value="未完了"
-						defaultChecked={!isDone}
+						defaultChecked={todo?.isDone === false}
 					/>
 					<label htmlFor="false">未完了</label>
 				</div>

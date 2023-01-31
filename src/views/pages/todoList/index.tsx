@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import {
+	clearTodoDetailState,
 	getTodoListAsync,
 	selectTodoList
 } from '../../../redux/slices/todo/todoSlice';
@@ -13,6 +14,7 @@ const TodoList: FC = () => {
 	useEffect(() => {
 		const getTodoList = async (): Promise<void> => {
 			try {
+				dispatch(clearTodoDetailState());
 				await dispatch(getTodoListAsync());
 			} catch (error) {
 				alert('Todo一覧の取得に失敗しました');
