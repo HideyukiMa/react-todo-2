@@ -14,3 +14,13 @@ export const getTodoListAPI = async (): Promise<Todo[] | undefined> => {
 		console.error(error);
 	}
 };
+
+export const getTodoAPI = async (todoId: number): Promise<Todo | undefined> => {
+	try {
+		const response = await todoApi.get(`/${todoId}`);
+		const todo: Todo = response.data;
+		return todo;
+	} catch (error) {
+		console.error(error);
+	}
+};
