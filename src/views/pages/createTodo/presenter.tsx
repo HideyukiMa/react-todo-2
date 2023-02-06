@@ -14,7 +14,7 @@ const CreateTodoUI: FC<Props> = ({
 		<div className={classes.createTodo}>
 			<Header title="Todo作成" path={paths.todoList} buttonText="一覧に戻る" />
 			<form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-				<div className={`${classes.content} ${classes.input}`}>
+				<div className={classes.input}>
 					<label className={classes.label}>タイトル</label>
 					<input
 						{...register('title', { required: true })}
@@ -23,16 +23,16 @@ const CreateTodoUI: FC<Props> = ({
 					{errors.title != null && (
 						<span className={classes.error}>入力必須項目です。</span>
 					)}
-				</div>
-				<div className={`${classes.content} ${classes.textarea}`}>
+					</div>
+				<div className={classes.textArea}>
 					<label className={classes.label}>詳細</label>
 					<textarea
 						{...register('details')}
-						className={classes.textareaValue}
+						className={classes.inputValue}
 					/>
 				</div>
 				<div className={classes.buttonArea}>
-					<button className={classes.button}>作成する</button>
+					<button className={classes.createButton}>作成する</button>
 				</div>
 			</form>
 		</div>

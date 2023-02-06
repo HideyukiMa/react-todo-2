@@ -15,7 +15,7 @@ const EditTodoUI: FC<Props> = ({
 		<div className={classes.editTodo}>
 			<Header title="Todo編集" path={paths.todoList} buttonText="一覧に戻る" />
 			<form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-				<div className={`${classes.content} ${classes.input}`}>
+				<div className={classes.input}>
 					<label className={classes.label}>タイトル</label>
 					<input
 						{...register('title', { required: true })}
@@ -26,12 +26,12 @@ const EditTodoUI: FC<Props> = ({
 						<span className={classes.error}>入力必須項目です。</span>
 					)}
 				</div>
-				<div className={`${classes.content} ${classes.textarea}`}>
+				<div className={classes.textArea}>
 					<label className={classes.label}>詳細</label>
 					<textarea
 						{...register('details')}
 						defaultValue={todo?.details != null ? todo.details : ''}
-						className={classes.textareaValue}
+						className={classes.inputValue}
 					/>
 				</div>
 				<div className={classes.radio}>
@@ -42,6 +42,7 @@ const EditTodoUI: FC<Props> = ({
 						name="isDone"
 						value="完了"
 						defaultChecked={todo?.isDone}
+						className={classes.radioInput}
 					/>
 					<label htmlFor="true">完了</label>
 					<input
@@ -51,11 +52,12 @@ const EditTodoUI: FC<Props> = ({
 						name="isDone"
 						value="未完了"
 						defaultChecked={todo?.isDone === false}
+						className={classes.radioInput}
 					/>
 					<label htmlFor="false">未完了</label>
 				</div>
 				<div className={classes.buttonArea}>
-					<button className={classes.button}>編集する</button>
+					<button className={classes.editButton}>編集する</button>
 				</div>
 			</form>
 		</div>

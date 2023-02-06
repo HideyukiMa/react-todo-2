@@ -1,51 +1,68 @@
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
-import paths from '../../../config/paths';
-import classes from './presenter.module.scss';
 import { Props } from './types';
+import classes from './presenter.module.scss';
+import Header from '../../components/header';
+import paths from '../../../config/paths';
+import { Link } from 'react-router-dom';
 
-const TodoDetailUI: FC<Props> = ({
-	register,
-	handleSubmit,
-	errors,
-	onSubmit
-}) => {
+const todoDetialUI: FC<Props> = ({ todo }) => {
 	return (
-		<div className={classes.TodoDetail}>
-			<div className={classes.header}>
-				<div className={classes.headerTitle}>Todo詳細</div>
-				<Link to={paths.todoList} className={classes.link}>
-					<button className={classes.returnButton}>一覧に戻る</button>
-				</Link>
-			</div>
-			<form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-				{/* title */}
-				<div className={classes.content}>
+		<div className={classes.todoDetial}>
+			<Header title="Todo詳細" path={paths.todoList} buttonText="一覧に戻る" />
+			<div className={classes.contents}>
+				<div className={classes.input}>
 					<label className={classes.label}>タイトル</label>
-					<input className={classes.inputValue} disabled />
+					<input
+						value={todo.title}
+						disabled
+						className={classes.inputValue}
+					></input>
 				</div>
-				{/* detail */}
-				<div className={classes.details}>
+				<div className={classes.textArea}>
 					<label className={classes.label}>詳細</label>
-					<textarea className={classes.textArea} disabled />
+					<textarea
+						value={todo.details}
+						disabled
+						className={classes.inputValue}
+					></textarea>
 				</div>
+				<div className={classes.radio}>
+					<input
+						id="true"
+						type="radio"
+						name="isDone"
+						value="完了"
+						checked={todo.isDone}
+						className={classes.radioInput}
+						disabled
+					/>
+					<label htmlFor="true" className={classes.radioLabel}>
+						完了
+					</label>
 
-				<div className={classes.radioArea}>
-					<input className={classes.radioInput} type="radio" />
-					<label className={classes.radioLabel}>完了</label>
-					<input className={classes.radioInput} type="radio"/>
-					<label className={classes.radioLabel}>未完了</label>
+					<input
+						id="false"
+						type="radio"
+						name="isDone"
+						value="未完了"
+						checked={!todo.isDone}
+						className={classes.radioInput}
+						disabled
+					/>
+					<label htmlFor="false" className={classes.radioLabel}>
+						未完了
+					</label>
 				</div>
 
 				<div className={classes.buttonArea}>
-					<Link to={`/edit-todo/`}>
+					<Link to={`/edit-todo/${todo.id}`}>
 						<button className={classes.editButton}>編集する</button>
 					</Link>
 					<button className={classes.deleteButton}>削除する</button>
 				</div>
-			</form>
+			</div>
 		</div>
 	);
 };
 
-export default TodoDetailUI;
+export default todoDetialUI;
