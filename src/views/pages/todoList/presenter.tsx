@@ -4,15 +4,16 @@ import Header from '../../components/header';
 import { Todo } from '../../../types/todo';
 import classes from './presenter.module.scss';
 import paths from '../../../config/paths';
-import DeleteModal from '../../components/deleteModal';
 import { Props } from './types';
+import sampledata from './sampleData.json'
 
-const TodoListUI: FC<Props> = ({ todoList }) => {
+
+const TodoListUI: FC = () => {
 	return (
 		<div className={classes.todoList}>
 			<Header title="Todo一覧" path={paths.createTodo} buttonText="新規作成" />
 			<div className={classes.list}>
-				{todoList?.map((item: Todo) => {
+				{sampledata.map((item) => {
 					return (
 						<ListItem
 							key={item.id}
@@ -24,7 +25,6 @@ const TodoListUI: FC<Props> = ({ todoList }) => {
 					);
 				})}
 			</div>
-			<DeleteModal />
 		</div>
 	);
 };

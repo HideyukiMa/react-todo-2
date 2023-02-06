@@ -1,31 +1,25 @@
-import React, { FC, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { toggleDeleteModal } from '../../../redux/slices/modal/modalSlice';
-import {
-	getTodoAsync,
-	selectTodoDetail,
-	setFocusTodoId
-} from '../../../redux/slices/todo/todoSlice';
+import React, { FC } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import TodoDetailUI from './presenter';
+import { CreateInputs } from './types';
 
 const TodoDetail: FC = () => {
-	const dispatch = useAppDispatch();
-	const todo = useAppSelector(selectTodoDetail);
-	const { todoId } = useParams();
-	const openModal = (): void => {
-		dispatch(setFocusTodoId(todoId));
-		dispatch(toggleDeleteModal(true));
+	const {
+		register,
+		handleSubmit,
+		formState: { errors }
+	} = useForm<CreateInputs>();
+	const onSubmit: SubmitHandler<CreateInputs> = (data): void => {
+		console.log(data);
 	};
-
-	useEffect(() => {
-		const getTodo = async (): Promise<void> => {
-			await dispatch(getTodoAsync(Number(todoId)));
-		};
-		void getTodo();
-	}, [todoId]);
-
-	return <TodoDetailUI todo={todo} openModal={openModal} />;
+	return (
+		<TodoDetailUI
+			register={register}
+			handleSubmit={handleSubmit}
+			errors={errors}
+			onSubmit={onSubmit}
+		/>
+	);
 };
 
 export default TodoDetail;

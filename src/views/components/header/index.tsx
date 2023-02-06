@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
-import { Props } from './types';
 import classes from './index.module.scss';
-import Title from '../title';
 import { Link } from 'react-router-dom';
+import { Props } from './types';
 
-const Header: FC<Props> = ({ title, path, buttonText }) => {
+
+const Header: FC <Props> = ({ title, path, buttonText })=> {
 	return (
 		<div className={classes.header}>
-			<Title title={title} />
+			<div className={classes.headerTitle}>{title}</div>
 			<Link to={path} className={classes.link}>
-				<button className={classes.button}>{buttonText}</button>
+				<button className={classes.returnButton}>{buttonText}</button>
 			</Link>
 		</div>
 	);
