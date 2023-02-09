@@ -1,16 +1,8 @@
-import { TodoState } from './types';
+import { TodoState } from "./types";
 
+// initialStateの値を定義
 export const initialTodoList = [];
-export const initialTodoDetail = {
-	id: 0,
-	title: '',
-	details: '',
-	isDone: false
-};
-export const initialFocusTodoId = 0;
 
+// initialStateの型を定義
 export const initialState: TodoState = {
-	todoList: initialTodoList,
-	todoDetail: initialTodoDetail,
-	focusTodoId: initialFocusTodoId
-};
+	todoList: initialTodoList};

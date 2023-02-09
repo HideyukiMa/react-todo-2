@@ -5,7 +5,7 @@ import todoReducer from './slices/todo/todoSlice';
 export const store = configureStore({
 	reducer: {
 		modal: modalReducer,
-		todo: todoReducer
+		todo: todoReducer,
 	}
 });
 
