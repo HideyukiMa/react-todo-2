@@ -6,6 +6,7 @@ import classes from './presenter.module.scss';
 import paths from '../../../config/paths';
 import { Props } from './types';
 import sampledata from './sampleData.json'
+import DeleteModal from '../../components/deleteModal';
 
 
 const TodoListUI: FC = () => {
@@ -25,6 +26,8 @@ const TodoListUI: FC = () => {
 					);
 				})}
 			</div>
+			<DeleteModal/>
+
 		</div>
 	);
 };

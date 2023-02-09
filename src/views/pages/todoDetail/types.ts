@@ -5,4 +5,5 @@ export interface Props {
 		details: string | null;
 		isDone: boolean;
 	};
+	openModal?: () => void;
 }

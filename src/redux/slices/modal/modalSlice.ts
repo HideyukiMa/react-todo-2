@@ -18,10 +18,9 @@ export const modalSlice = createSlice({
 		}
 	}
 });
-
 export const { toggleDeleteModal } = modalSlice.actions;
-
-export const selectDeleteModalIsOpen = (state: RootState): boolean =>
-	state.modal.deleteModalIsOpen;
+export const selectDeleteModalIsOpen = (state: RootState): boolean => {
+	return state.modal.deleteModalIsOpen;
+};
 
 export default modalSlice.reducer;

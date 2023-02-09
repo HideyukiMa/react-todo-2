@@ -4,9 +4,11 @@ import classes from './presenter.module.scss';
 import Header from '../../components/header';
 import paths from '../../../config/paths';
 import { Link } from 'react-router-dom';
+import DeleteModal from '../../components/deleteModal';
 
-const todoDetialUI: FC<Props> = ({ todo }) => {
+const todoDetialUI: FC<Props> = ({ todo, openModal }) => {
 	return (
+		//
 		<div className={classes.todoDetial}>
 			<Header title="Todo詳細" path={paths.todoList} buttonText="一覧に戻る" />
 			<div className={classes.contents}>
@@ -58,10 +60,14 @@ const todoDetialUI: FC<Props> = ({ todo }) => {
 					<Link to={`/edit-todo/${todo.id}`}>
 						<button className={classes.editButton}>編集する</button>
 					</Link>
-					<button className={classes.deleteButton}>削除する</button>
+					<button onClick={openModal} 
+					className={classes.deleteButton}>削除する</button>
 				</div>
 			</div>
+			{/* //削除モーダルの呼び出し */}
+			<DeleteModal />
 		</div>
+		
 	);
 };
 
