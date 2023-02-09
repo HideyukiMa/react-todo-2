@@ -1,18 +1,30 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { initialState } from './initialState';
-import { getTodoListAPI } from './todoAPI';
+import { getTodoAPI, getTodoListAPI } from './todoAPI';
 import { Todo } from '../../../types/todo';
 
 // getTodoListAsyncをcreateAsyncThunkで定義
+// getTodoListAPIを呼び出し、非同期処理の結果を返す
 export const getTodoListAsync = createAsyncThunk(
 	'todo/getTodoList',
 	async () => {
-		// getTodoListAPIを呼び出し、responseを返す
 		const response = await getTodoListAPI();
 		return response;
 	}
 );
+
+// getTodoAsyncをcreateAsyncThunkで定義
+// getTodoAPIを呼び出し、非同期処理の結果を返す
+export const getTodoAsync = createAsyncThunk(
+	'todo/getTodo',
+	async (todoId: number) => {
+		const response = await getTodoAPI(todoId);
+		return response;
+	}
+);
+
+
 
 // todoSliceという名前のsliceを作成
 export const todoSlice = createSlice({
@@ -35,6 +47,12 @@ export const todoSlice = createSlice({
 				state.todoList = action.payload;
 			}
 		});
+		builder.addCase(getTodoAsync.fulfilled, (state, action) => {
+			if (action.payload !== undefined) {
+				state.todoDetail = action.payload;
+			}
+		}
+		);
 	}
 	
 });
@@ -44,6 +62,12 @@ export const todoSlice = createSlice({
 // undefinedを返すこともある
 export const selectTodoList = (state: RootState): Todo[] | undefined=> 
 	state.todo.todoList;
+
+// selectTodoDetailを定義
+// RootStateを引数にとり、Todo型を返す
+// undefinedを返すこともある
+export const selectTodoDetail = (state: RootState): Todo | undefined =>
+	state.todo.todoDetail;
 
 // todoSliceのreducerをexport
 export default todoSlice.reducer;

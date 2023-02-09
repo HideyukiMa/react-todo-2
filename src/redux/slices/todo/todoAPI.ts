@@ -19,3 +19,20 @@ export const getTodoListAPI = async (): Promise<Todo[] | undefined> => {
   }
 }
 
+// getTodoAPIを定義
+// 返り値はPromise型で、Todo型の配列を返す
+// undefinedを返すこともある
+export const getTodoAPI = async (todoId: number): Promise<Todo | undefined> => {
+    try {
+        // axiosでGETリクエストを送信
+        const res = await axios.get(`http://localhost:8080/todo/${todoId}`);
+    
+        // Todoを返す
+        const todo:Todo = res.data;
+        return todo;
+    } catch (error) {
+        console.log(error);
+        alert("エラーが発生しました");
+    }
+    }
+

@@ -15,7 +15,7 @@ const todoDetialUI: FC<Props> = ({ todo, openModal }) => {
 				<div className={classes.input}>
 					<label className={classes.label}>タイトル</label>
 					<input
-						value={todo.title}
+						value={todo?.title}
 						disabled
 						className={classes.inputValue}
 					></input>
@@ -23,7 +23,7 @@ const todoDetialUI: FC<Props> = ({ todo, openModal }) => {
 				<div className={classes.textArea}>
 					<label className={classes.label}>詳細</label>
 					<textarea
-						value={todo.details}
+						value={todo?.details !=null ? todo?.details : ''}
 						disabled
 						className={classes.inputValue}
 					></textarea>
@@ -34,7 +34,7 @@ const todoDetialUI: FC<Props> = ({ todo, openModal }) => {
 						type="radio"
 						name="isDone"
 						value="完了"
-						checked={todo.isDone}
+						checked={todo?.isDone }
 						className={classes.radioInput}
 						disabled
 					/>
@@ -47,7 +47,7 @@ const todoDetialUI: FC<Props> = ({ todo, openModal }) => {
 						type="radio"
 						name="isDone"
 						value="未完了"
-						checked={!todo.isDone}
+						checked={!todo?.isDone}
 						className={classes.radioInput}
 						disabled
 					/>
@@ -57,7 +57,8 @@ const todoDetialUI: FC<Props> = ({ todo, openModal }) => {
 				</div>
 
 				<div className={classes.buttonArea}>
-					<Link to={`/edit-todo/${todo.id}`}>
+				{/* eslint-diable-next-line @typescript-eslint/restrict-template-expressions */}
+					<Link to={`/edit-todo/${todo?.id}`}>
 						<button className={classes.editButton}>編集する</button>
 					</Link>
 					<button onClick={openModal} 

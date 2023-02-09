@@ -1,26 +1,44 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import TodoDetailUI from './presenter';
-//reduxを使用するための記述
-//useAppDispatchはdispatchを使用するための記述
-//toggleDeleteModalはmodalSlice.tsxで定義した関数
-import { useAppDispatch } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { toggleDeleteModal } from '../../../redux/slices/modal/modalSlice';
-import sampledata from './sampleData.json'
+import {
+	getTodoAsync,
+	selectTodoDetail
+} from '../../../redux/slices/todo/todoSlice';
+import { useParams } from 'react-router-dom';
 
 const TodoDetail: FC = () => {
-//dispatchでtoggleDeleteModalを呼び出す
-const dispatch = useAppDispatch();
-//openModal関数の定義
-const openModal = (): void => {
-	dispatch(toggleDeleteModal(true));}
+	// dispatchでtoggleDeleteModalを呼び出す
+	const dispatch = useAppDispatch();
+	// todoをuseAppSelectorでselectTodoDetailから取得
+	const todo = useAppSelector(selectTodoDetail);
 
-	//Propsの値をTodoDetailUIに渡す
+	// todoIdをuseParamsで取得
+	const { todoId } = useParams<{ todoId: string }>();
+
+	// openModal関数の定義
+	const openModal = (): void => {
+		dispatch(toggleDeleteModal(true));
+	};
+
+	// useEffectで初回レンダリング時にgetTodoAsyncをdispatch
+	// dispatchの戻り値はPromiseなのでasync/awaitで処理
+	// dispatchの戻り値はPromiseなのでvoidで型を明示
+	// Number(todoId)で文字列を数値に変換
+	useEffect(() => {
+		const getTodo = async (): Promise<void> => {
+			await dispatch(getTodoAsync(Number(todoId)));
+		};
+		void getTodo();
+	}, []);
+
+	// Propsの値をTodoDetailUIに渡す
 	return (
-		//Propsの値をTodoDetailUIに渡す
-		//sampledataはsampleData.jsonから読み込んだデータ
-		
-		<TodoDetailUI todo = {sampledata} openModal={openModal}
-		/>
+		// Propsの値をTodoDetailUIに渡す
+		// sampledataはsampleData.jsonから読み込んだデータ
+
+		<TodoDetailUI todo={todo} openModal={openModal} />
 	);
 };
 

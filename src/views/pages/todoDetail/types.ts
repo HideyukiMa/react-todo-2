@@ -1,9 +1,6 @@
+import { Todo } from '../../../types/todo';
+
 export interface Props {
-	todo: {
-		id: number;
-		title: string;
-		details: string | null;
-		isDone: boolean;
-	};
+	todo: Todo | undefined;
 	openModal?: () => void;
 }
