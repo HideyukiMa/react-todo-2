@@ -1,9 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { initialState } from './initialState';
-import { createTodoAPI, getTodoAPI, getTodoListAPI } from './todoAPI';
+import {
+	createTodoAPI,
+	editTodoAPI,
+	getTodoAPI,
+	getTodoListAPI
+} from './todoAPI';
 import { Todo } from '../../../types/todo';
 import { CreateInputs } from '../../../views/pages/createTodo/types';
+import { EditInputs } from '../../../views/pages/editTodo/types';
 
 // createTodoAsyncをcreateAsyncThunkで定義
 // argsを引数にとり、createTodoAPIを呼び出し、非同期処理の結果を返す
@@ -15,7 +21,16 @@ export const createTodoAsync = createAsyncThunk(
 	}
 );
 
-
+// editTodoAsyncをcreateAsyncThunkで定義
+// argsを引数にとり、editTodoAPIを呼び出し、非同期処理の結果を返す
+export const editTodoAsync = createAsyncThunk(
+	'todo/editTodo',
+	// argsを引数にとり、editTodoAPIを呼び出し、非同期処理の結果を返す
+	async (args: EditInputs) => {
+		const response = await editTodoAPI(args);
+		return response;
+	}
+);
 
 // getTodoListAsyncをcreateAsyncThunkで定義
 // getTodoListAPIを呼び出し、非同期処理の結果を返す
@@ -37,8 +52,6 @@ export const getTodoAsync = createAsyncThunk(
 	}
 );
 
-
-
 // todoSliceという名前のsliceを作成
 export const todoSlice = createSlice({
 	// sliceの名前
@@ -46,7 +59,13 @@ export const todoSlice = createSlice({
 	// initialStateの値を定義
 	initialState,
 	// reducerの定義
-	reducers: {},
+	// clearTodoDetailを定義
+	// stateの値を更新
+	reducers: {
+		clearTodoDetail: (state) => {
+			state.todoDetail = initialState.todoDetail;
+		}
+	},
 	// extraReducersの定義
 	// builder.addCaseで非同期処理の状態を定義
 	// action.payloadで非同期処理の結果を取得
@@ -55,14 +74,14 @@ export const todoSlice = createSlice({
 	// undefinedでない場合はstateの値を更新
 	// state.todoList = action.payload;
 	extraReducers: (builder) => {
-		// createTodoAsyncの状態を定義	
+		// createTodoAsyncの状態を定義
 		builder.addCase(createTodoAsync.fulfilled, (state, action) => {
 			// action.payloadがundefinedでない場合
 			// state.todoListがundefinedでない場合
 			if (state.todoList !== undefined && action.payload !== undefined) {
 				// state.todoListの値を更新
 				// state.todoList = [...state.todoList, action.payload];
-				state.todoList=[...state.todoList, action.payload];
+				state.todoList = [...state.todoList, action.payload];
 			}
 		});
 
@@ -75,16 +94,39 @@ export const todoSlice = createSlice({
 			if (action.payload !== undefined) {
 				state.todoDetail = action.payload;
 			}
-		}
-		);
+		});
+
+		// editTodoAsyncの状態を定義
+		// state.todoListの値を更新
+		// state.todoList?.findでstate.todoListの中からidが一致するものを探す
+		// state.todoList?.findで取得した値をtodoとする
+		builder.addCase(editTodoAsync.fulfilled, (state, action) => {
+			// action.payloadがundefinedでない場合
+			// state.todoListがundefinedでない場合
+			// state.todoListの中からidが一致するものを探す
+			// state.todoListの中からidが一致するものをtodoとする
+			const todo = state.todoList?.find((todo) => {
+				return todo.id === action.payload?.id;
+			});
+			// todoがundefinedでない場合
+			// action.payloadがundefinedでない場合
+			// todoの値を更新
+			if (todo != null && action.payload != null) {
+				todo.title = action.payload.title;
+				todo.details = action.payload.details;
+				todo.isDone = action.payload.isDone;
+			}
+		});
 	}
-	
 });
+
+// clearTodoDetailを定義
+export const { clearTodoDetail } = todoSlice.actions;
 
 // selectTodoListを定義
 // RootStateを引数にとり、Todo型の配列を返す
 // undefinedを返すこともある
-export const selectTodoList = (state: RootState): Todo[] | undefined=> 
+export const selectTodoList = (state: RootState): Todo[] | undefined =>
 	state.todo.todoList;
 
 // selectTodoDetailを定義

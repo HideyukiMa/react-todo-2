@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { getTodoListAsync, selectTodoList } from '../../../redux/slices/todo/todoSlice';
+import { clearTodoDetail, getTodoListAsync, selectTodoList } from '../../../redux/slices/todo/todoSlice';
 import TodoListUI from './presenter';
 // useAppDispatch, useAppSelectorをimport
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
@@ -19,6 +19,10 @@ const TodoList: FC = () => {
 	useEffect(() => {
 		const getTodoList = async ():Promise<void> => {
 			await dispatch(getTodoListAsync());
+			// getTodoListAsyncの処理が終わったら、Todo詳細のstateを初期化
+			// これをしないと、Todo詳細ページでTodoを削除した後に、Todo一覧ページに遷移したときに、
+			// 削除したTodoの詳細が表示されてしまう
+			dispatch(clearTodoDetail());
 		};
 		void getTodoList();
 	},[]);

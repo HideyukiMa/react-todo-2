@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Todo } from '../../../types/todo';
 import { CreateInputs } from '../../../views/pages/createTodo/types';
+import { EditInputs } from '../../../views/pages/editTodo/types';
 
 // axios.createでbaseURLを設定しているので、
 // baseURLを除いたパスを指定する
@@ -64,3 +65,32 @@ export const getTodoAPI = async (todoId: number): Promise<Todo | undefined> => {
 		alert('エラーが発生しました');
 	}
 };
+
+
+// editTodoAPIを定義
+// 返り値はPromise型で、Todo型を返す
+// undefinedを返すこともある
+// EditInputs型の引数をargsとして受け取る
+export const editTodoAPI = async (
+	args: EditInputs
+): Promise<Todo | undefined> => {
+	try {
+		// axiosでPUTリクエストを送信
+		const { todoId, title, details, isDone } = args;
+		// isDoneはstring型なのでboolean型に変換
+		const convertedIsDone:boolean = isDone === '完了';
+		// axiosでPUTリクエストを送信
+		const res = await todoApi.patch('/', {
+			todoId,
+			title,
+			details,
+			isDone: convertedIsDone
+			});
+		// Todoを返す
+		const todo: Todo = res.data;
+		return todo;
+	} catch (error) {
+		console.log(error);
+		alert('エラーが発生しました');
+	}
+}
