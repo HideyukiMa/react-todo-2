@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { toggleDeleteModal } from '../../../redux/slices/modal/modalSlice';
 import {
 	getTodoAsync,
-	selectTodoDetail
+	selectTodoDetail,
+	setFocusTodoId
 } from '../../../redux/slices/todo/todoSlice';
 import { useParams } from 'react-router-dom';
 
@@ -20,6 +21,7 @@ const TodoDetail: FC = () => {
 	// openModal関数の定義
 	const openModal = (): void => {
 		dispatch(toggleDeleteModal(true));
+		dispatch(setFocusTodoId(Number(todoId)));
 	};
 
 	// useEffectで初回レンダリング時にgetTodoAsyncをdispatch

@@ -66,7 +66,6 @@ export const getTodoAPI = async (todoId: number): Promise<Todo | undefined> => {
 	}
 };
 
-
 // editTodoAPIを定義
 // 返り値はPromise型で、Todo型を返す
 // undefinedを返すこともある
@@ -78,14 +77,14 @@ export const editTodoAPI = async (
 		// axiosでPUTリクエストを送信
 		const { todoId, title, details, isDone } = args;
 		// isDoneはstring型なのでboolean型に変換
-		const convertedIsDone:boolean = isDone === '完了';
+		const convertedIsDone: boolean = isDone === '完了';
 		// axiosでPUTリクエストを送信
 		const res = await todoApi.patch('/', {
 			todoId,
 			title,
 			details,
 			isDone: convertedIsDone
-			});
+		});
 		// Todoを返す
 		const todo: Todo = res.data;
 		return todo;
@@ -93,4 +92,25 @@ export const editTodoAPI = async (
 		console.log(error);
 		alert('エラーが発生しました');
 	}
-}
+};
+
+// deleteTodoAPIを定義
+// 返り値はPromise型で、Todo型を返す
+// undefinedを返すこともある
+// DeleteTodoArgs型の引数をargsとして受け取る
+
+export const deleteTodoAPI = async (args: {
+	todoId: number;
+}): Promise<Todo | undefined> => {
+	try {
+		const { todoId } = args;
+		const response = await todoApi.delete('/', {
+			data: { todoId }
+		});
+		const todo: Todo = response.data;
+		return todo;
+	} catch (error) {
+		console.error(error);
+		alert('Todoの削除に失敗しました。');
+	}
+};

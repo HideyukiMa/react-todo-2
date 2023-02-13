@@ -3,6 +3,7 @@ import { RootState } from '../../store';
 import { initialState } from './initialState';
 import {
 	createTodoAPI,
+	deleteTodoAPI,
 	editTodoAPI,
 	getTodoAPI,
 	getTodoListAPI
@@ -28,6 +29,16 @@ export const editTodoAsync = createAsyncThunk(
 	// argsを引数にとり、editTodoAPIを呼び出し、非同期処理の結果を返す
 	async (args: EditInputs) => {
 		const response = await editTodoAPI(args);
+		return response;
+	}
+);
+
+// deleteTodoAsyncをcreateAsyncThunkで定義
+// todoIdを引数にとり、deleteTodoAPIを呼び出し、非同期処理の結果を返す
+export const deleteTodoAsync = createAsyncThunk(
+	'todo/deleteTodo',
+	async (args: { todoId: number }) => {
+		const response = await deleteTodoAPI(args);
 		return response;
 	}
 );
@@ -64,6 +75,12 @@ export const todoSlice = createSlice({
 	reducers: {
 		clearTodoDetail: (state) => {
 			state.todoDetail = initialState.todoDetail;
+		},
+		// setFocusTodoIdを定義
+		// stateの値を更新
+
+		setFocusTodoId: (state, action) => {
+			state.focusTodoId = action.payload;
 		}
 	},
 	// extraReducersの定義
@@ -95,6 +112,14 @@ export const todoSlice = createSlice({
 				state.todoDetail = action.payload;
 			}
 		});
+		// deleteTodoAsyncの状態を定義
+		// state.todoListの値を更新
+		// state.todoList?.filterでstate.todoListの中からidが一致しないものを取得
+		builder.addCase(deleteTodoAsync.fulfilled, (state, action) => {
+			state.todoList = state.todoList?.filter(
+				(todo) => todo.id !== action.payload?.id
+			);
+		});
 
 		// editTodoAsyncの状態を定義
 		// state.todoListの値を更新
@@ -121,7 +146,7 @@ export const todoSlice = createSlice({
 });
 
 // clearTodoDetailを定義
-export const { clearTodoDetail } = todoSlice.actions;
+export const { clearTodoDetail, setFocusTodoId } = todoSlice.actions;
 
 // selectTodoListを定義
 // RootStateを引数にとり、Todo型の配列を返す
@@ -134,6 +159,12 @@ export const selectTodoList = (state: RootState): Todo[] | undefined =>
 // undefinedを返すこともある
 export const selectTodoDetail = (state: RootState): Todo | undefined =>
 	state.todo.todoDetail;
+
+// selectFocusTodoIdを定義
+// RootStateを引数にとり、number型を返す
+
+export const selectFocusTodoId = (state: RootState): number =>
+	state.todo.focusTodoId;
 
 // todoSliceのreducerをexport
 export default todoSlice.reducer;
