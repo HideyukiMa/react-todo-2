@@ -1,8 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { initialState } from './initialState';
-import { getTodoAPI, getTodoListAPI } from './todoAPI';
+import { createTodoAPI, getTodoAPI, getTodoListAPI } from './todoAPI';
 import { Todo } from '../../../types/todo';
+import { CreateInputs } from '../../../views/pages/createTodo/types';
+
+// createTodoAsyncをcreateAsyncThunkで定義
+// argsを引数にとり、createTodoAPIを呼び出し、非同期処理の結果を返す
+export const createTodoAsync = createAsyncThunk(
+	'todo/createTodo',
+	async (args: CreateInputs) => {
+		const response = await createTodoAPI(args);
+		return response;
+	}
+);
+
+
 
 // getTodoListAsyncをcreateAsyncThunkで定義
 // getTodoListAPIを呼び出し、非同期処理の結果を返す
@@ -42,6 +55,17 @@ export const todoSlice = createSlice({
 	// undefinedでない場合はstateの値を更新
 	// state.todoList = action.payload;
 	extraReducers: (builder) => {
+		// createTodoAsyncの状態を定義	
+		builder.addCase(createTodoAsync.fulfilled, (state, action) => {
+			// action.payloadがundefinedでない場合
+			// state.todoListがundefinedでない場合
+			if (state.todoList !== undefined && action.payload !== undefined) {
+				// state.todoListの値を更新
+				// state.todoList = [...state.todoList, action.payload];
+				state.todoList=[...state.todoList, action.payload];
+			}
+		});
+
 		builder.addCase(getTodoListAsync.fulfilled, (state, action) => {
 			if (action.payload !== undefined) {
 				state.todoList = action.payload;
